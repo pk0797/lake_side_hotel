@@ -13,6 +13,7 @@ import java.util.List;
 
 
 public class RoomResponse {
+    //Room Response is a DTO
     private Long id;
     private String roomType;
     private BigDecimal roomPrice;
@@ -27,14 +28,14 @@ public class RoomResponse {
     }
 
     public RoomResponse(Long id, String roomType, BigDecimal roomPrice, boolean isBooked,
-                        byte[] photoBytes, List<BookingResponse> bookings) {
-
+                        byte[] photoBytes) {
+           // , List<BookingResponse> bookings
         this.id = id;
         this.roomType = roomType;
         this.roomPrice = roomPrice;
         this.isBooked = isBooked;
         //this.photo = photoBytes != null ? Base64.encodeBase64String(photoBytes) : null;  -- this is depricated as we use the java util lib
         this.photo = photoBytes != null ? java.util.Base64.getEncoder().encodeToString(photoBytes) : null;
-        this.bookings = bookings;
+        //this.bookings = bookings;
     }
 }
