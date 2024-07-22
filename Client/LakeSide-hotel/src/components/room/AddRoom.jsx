@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { addRoom } from "../utils/ApiFunctions";
 import RoomTypeSelector from "../common/RoomTypeSelector";
+import { Link } from "react-router-dom";
 
 /* Component declaration */
 const AddRoom = () => {
@@ -123,7 +124,10 @@ const AddRoom = () => {
                                 )}
                             </div>
                             
-                            <div className="d-grid d-md-flex mt-2">
+                            <div className="d-grid gap-2 d-md-flex mt-2">
+                                <Link to={"/existing-rroms"} className="btn btn-outline-info">
+                                 Back 
+                                </Link>
                                 <button type="submit" className="btn btn-outline-primary ml-5">
                                     Save Room
                                 </button>
