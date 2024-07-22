@@ -1,4 +1,13 @@
 package com.fullstack.lake_side_view_hotel.repository;
 
-public interface BookingRepository {
+import com.fullstack.lake_side_view_hotel.model.BookedRoom;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface BookingRepository extends JpaRepository<BookedRoom, Long> {
+
+    BookedRoom findByBookingConfirmationCode(String confirmationCode);
+
+    List<BookedRoom> findByRoomId(Long roomId);
 }
