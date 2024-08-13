@@ -1,7 +1,8 @@
 package com.fullstack.lake_side_view_hotel.controller;
 
 import com.fullstack.lake_side_view_hotel.exception.InternalServerException;
-import com.fullstack.lake_side_view_hotel.exception.PhotoRetrievalExcetion;
+import com.fullstack.lake_side_view_hotel.exception.PhotoRetrievalException;
+import com.fullstack.lake_side_view_hotel.exception.PhotoRetrievalException;
 import com.fullstack.lake_side_view_hotel.exception.ResourceNotFoundException;
 import com.fullstack.lake_side_view_hotel.model.BookedRoom;
 import com.fullstack.lake_side_view_hotel.model.Room;
@@ -108,7 +109,7 @@ public class RoomController {
             try{
                 photoBytes = photoBlob.getBytes(1,(int) photoBlob.length());
             }catch(SQLException e){
-                throw new PhotoRetrievalExcetion("Error retieving photo");
+                throw new PhotoRetrievalException("Error retrieving photo");
             }
         }
         return new RoomResponse(room.getId(),

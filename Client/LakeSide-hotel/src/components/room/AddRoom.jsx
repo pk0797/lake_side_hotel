@@ -65,17 +65,21 @@ const AddRoom = () => {
     /* Component render */
     return (
         <>
-            <section className = "container, mt-5 mt-5">
+            <section className = "container mt-5 mt-5">
                 <div className="row justify-content-center">
                     <div className="col-md-8 col-lg-6">
                         <h2 className="mt-5 mb-2">Add New Room</h2>
                         
                         {successMessage && (
-                            <div className="alert alert-success fade show"> {successMessage}</div>
+                            <div className="alert alert-success fade show">
+                                {successMessage}
+                            </div>
                         )}
 
                         {errorMessage && (
-                            <div className="alert alert-danger fade show"> {errorMessage} </div>
+                            <div className="alert alert-danger fade show">
+                                {errorMessage}
+                            </div>
                         )}
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
@@ -124,8 +128,8 @@ const AddRoom = () => {
                                 )}
                             </div>
                             
-                            <div className="d-grid gap-2 d-md-flex mt-2">
-                                <Link to={"/existing-rroms"} className="btn btn-outline-info">
+                            <div className="d-grid d-md-flex mt-2">
+                                <Link to={"/existing-rooms"} className="btn btn-outline-info">
                                  Back 
                                 </Link>
                                 <button type="submit" className="btn btn-outline-primary ml-5">

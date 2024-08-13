@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import Header from '../common/Header'
 
 const BookingSuccess = () => {
     const location = useLocation()
@@ -17,7 +18,7 @@ const BookingSuccess = () => {
 				) : (
 					<div>
 					    <h3 className="text-danger"> Error Booking Room!</h3>
-						<p className="text-danger">{error}</p>
+						<p className="text-danger">{message}</p>
 						
 					</div>
 				)}

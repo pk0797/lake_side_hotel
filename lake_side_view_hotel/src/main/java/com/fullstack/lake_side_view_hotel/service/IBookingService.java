@@ -9,7 +9,7 @@ public interface IBookingService {
 
     String saveBooking(Long roomId, BookedRoom bookingRequest);
 
-    BookedRoom findbyBookingConfirmationCode(String confirmationCode);
+    BookedRoom findByBookingConfirmationCode(String confirmationCode);
 
     List<BookedRoom> getAllBookings();
 }

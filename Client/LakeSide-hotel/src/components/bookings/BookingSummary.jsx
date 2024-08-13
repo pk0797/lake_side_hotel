@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+import { Button } from 'react-bootstrap'
 
 const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
+
+	// console.log(booking)
+    console.log(payment)
+    // console.log(isFormValid)
+    // console.log(onConfirm)
 
     const checkInDate = moment(booking.checkInDate)
 	const checkOutDate = moment(booking.checkOutDate)
@@ -47,7 +54,7 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
         <div>
 			<h5>Number of Guest</h5>
 			<strong>
-				Adult{booking.numberOfAdults > 1 ? "s" : ""} : {booking.numberOfAdults}
+				<p>Adult{booking.numberOfAdults > 1 ? "s" : ""} : {booking.numberOfAdults} </p>
 			</strong>
 			<strong>
 				<p>Children : {booking.numberOfChildren}</p>

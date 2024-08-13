@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getRoomById } from '../utils/ApiFunctions'
+import { getRoomById, bookRoom } from '../utils/ApiFunctions'
 import moment from "moment"
-import { useNavigate } from 'react-router-dom'
+import BookingSummary from "./BookingSummary"
+import { useNavigate, useParams } from 'react-router-dom'
+import { Form, FormControl, Button } from "react-bootstrap"
+
 
 const BookingForm = () => {
     const[isValidated, setIsValidated] = useState(false)
@@ -19,7 +22,7 @@ const BookingForm = () => {
 
     const[roominfo, setRoominfo] = useState({
         photo : "", 
-        roomtype :"",
+        roomType :"",
         roomPrice : ""
     })
 
@@ -85,18 +88,167 @@ const BookingForm = () => {
 		try {
 			const confirmationCode = await bookRoom(roomId, booking)
 			setIsSubmitted(true)
-            navigate("/", { state: { message: confirmationCode } })
+            navigate("/booking-success", { state: { message: confirmationCode } })
 		} catch (error) {
 			setErrorMessage(error.message)
-            navigate("/", { state: { error: errorMessage } })
+            navigate("/booking-success", { state: { error: errorMessage } })
 		}
 	}
 
   return (
-    <div>
+    <>
+			<div className="container mb-5">
+				<div className="row">
+					<div className="col-md-6">
+						<div className="card card-body mt-5">
+							<h4 className="card-title">Reserve Room</h4>
 
+							<Form noValidate validated={isValidated} onSubmit={handleSubmit}>
+								<Form.Group>
+									<Form.Label htmlFor="guestFullName" className="hotel-color">
+										Fullname
+									</Form.Label>
+									<FormControl
+										required
+										type="text"
+										id="guestFullName"
+										name="guestFullName"
+										value={booking.guestFullName}
+										placeholder="Enter your fullname"
+										onChange={handleInputChange}
+									/>
+									<Form.Control.Feedback type="invalid">
+										Please enter your fullname.
+									</Form.Control.Feedback>
+								</Form.Group>
 
-    </div>
+								<Form.Group>
+									<Form.Label htmlFor="guestEmail" className="hotel-color">
+										Email
+									</Form.Label>
+									<FormControl
+										required
+										type="email"
+										id="guestEmail"
+										name="guestEmail"
+										value={booking.guestEmail}
+										placeholder="Enter your email"
+										onChange={handleInputChange}
+										disabled
+									/>
+									<Form.Control.Feedback type="invalid">
+										Please enter a valid email address.
+									</Form.Control.Feedback>
+								</Form.Group>
+
+								<fieldset style={{ border: "2px" }}>
+									<legend>Lodging Period</legend>
+									<div className="row">
+										<div className="col-6">
+											<Form.Label htmlFor="checkInDate" className="hotel-color">
+												Check-in date
+											</Form.Label>
+											<FormControl
+												required
+												type="date"
+												id="checkInDate"
+												name="checkInDate"
+												value={booking.checkInDate}
+												placeholder="check-in-date"
+												min={moment().format("MMM Do, YYYY")}
+												onChange={handleInputChange}
+											/>
+											<Form.Control.Feedback type="invalid">
+												Please select a check in date.
+											</Form.Control.Feedback>
+										</div>
+
+										<div className="col-6">
+											<Form.Label htmlFor="checkOutDate" className="hotel-color">
+												Check-out date
+											</Form.Label>
+											<FormControl
+												required
+												type="date"
+												id="checkOutDate"
+												name="checkOutDate"
+												value={booking.checkOutDate}
+												placeholder="check-out-date"
+												min={moment().format("MMM Do, YYYY")}
+												onChange={handleInputChange}
+											/>
+											<Form.Control.Feedback type="invalid">
+												Please select a check out date.
+											</Form.Control.Feedback>
+										</div>
+										{errorMessage && <p className="error-message text-danger">{errorMessage}</p>}
+									</div>
+								</fieldset>
+
+								<fieldset style={{ border: "2px" }}>
+									<legend>Number of Guest</legend>
+									<div className="row">
+										<div className="col-6">
+											<Form.Label htmlFor="numberOfAdults" className="hotel-color">
+												Adults
+											</Form.Label>
+											<FormControl
+												required
+												type="number"
+												id="numberOfAdults"
+												name="numberOfAdults"
+												value={booking.numberOfAdults}
+												min={1}
+												placeholder="0"
+												onChange={handleInputChange}
+											/>
+											<Form.Control.Feedback type="invalid">
+												Please select at least 1 adult.
+											</Form.Control.Feedback>
+										</div>
+										<div className="col-6">
+											<Form.Label htmlFor="numberOfChildren" className="hotel-color">
+												Children
+											</Form.Label>
+											<FormControl
+												required
+												type="number"
+												id="numberOfChildren"
+												name="numberOfChildren"
+												value={booking.numberOfChildren}
+												placeholder="0"
+												min={0}
+												onChange={handleInputChange}
+											/>
+											{/* <Form.Control.Feedback type="invalid">
+												Select 0 if no children
+											</Form.Control.Feedback> */}
+										</div>
+									</div>
+								</fieldset>
+
+								<div className="form-group mt-2 mb-2">
+									<button type="submit" className="btn btn-hotel">
+										Continue
+									</button>
+								</div>
+							</Form>
+						</div>
+					</div>
+
+					<div className="col-md-6">
+						{isSubmitted && (
+							<BookingSummary
+								booking={booking}
+								payment={calculatePayment()}
+								onConfirm={handleFormSubmit}
+								isFormValid={isValidated}
+							/>
+						)}
+					</div>
+				</div>
+			</div>
+		</>
   )
 }
 

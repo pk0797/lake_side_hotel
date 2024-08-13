@@ -65,7 +65,7 @@ const Room = () => {
             {renderRooms()}</Row>
 
         <Row>
-        <   Col md={6} className="d=flex align-items-center justify-content-end">
+        <   Col md={6} className="d-flex align-items-center justify-content-end">
                 <RoomPaginator 
                 currentPage = {currentPage}
                 totalPages={totalPages}

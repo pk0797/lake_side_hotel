@@ -8,7 +8,6 @@ import com.fullstack.lake_side_view_hotel.response.BookingResponse;
 import com.fullstack.lake_side_view_hotel.response.RoomResponse;
 import com.fullstack.lake_side_view_hotel.service.IBookingService;
 import com.fullstack.lake_side_view_hotel.service.IRoomService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class BookingController {
     @GetMapping("/confirmation/{confirmationCode}")
     public  ResponseEntity<?> getBookingByConfirmationCode(@PathVariable String confirmationCode){
         try{
-            BookedRoom booking = bookingService.findbyBookingConfirmationCode(confirmationCode);
+            BookedRoom booking = bookingService.findByBookingConfirmationCode(confirmationCode);
             BookingResponse bookingResponse = getBookingResponse(booking);
             return ResponseEntity.ok(bookingResponse);
         }catch (ResourceNotFoundException ex){
@@ -61,7 +60,7 @@ public class BookingController {
     }
 
     @DeleteMapping("/booking/{bookingId}/delete")
-    public void cancelBooking(Long bookingId){
+    public void cancelBooking(@PathVariable Long bookingId){
         bookingService.cancelBooking(bookingId);
     }
 
@@ -75,7 +74,7 @@ public class BookingController {
                 booking.getBookingId(), booking.getCheckInDate(),
                 booking.getCheckOutDate(), booking.getGuestFullName(),
                 booking.getGuestEmail(), booking.getNumOfAdults(),
-                booking.getNumOfChildren(), booking.getTotalNumofGuest(),
+                booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
                 booking.getBookingConfirmationCode(), room);
     }
 }

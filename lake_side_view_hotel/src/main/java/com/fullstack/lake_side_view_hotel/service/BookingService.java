@@ -5,12 +5,13 @@ import com.fullstack.lake_side_view_hotel.model.BookedRoom;
 import com.fullstack.lake_side_view_hotel.model.Room;
 import com.fullstack.lake_side_view_hotel.repository.BookingRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookingService implements IBookingService{
 
     private final BookingRepository bookingRepository;
@@ -51,7 +52,7 @@ public class BookingService implements IBookingService{
 
 
     @Override
-    public BookedRoom findbyBookingConfirmationCode(String confirmationCode) {
+    public BookedRoom findByBookingConfirmationCode(String confirmationCode) {
         return bookingRepository.findByBookingConfirmationCode(confirmationCode);
     }
 

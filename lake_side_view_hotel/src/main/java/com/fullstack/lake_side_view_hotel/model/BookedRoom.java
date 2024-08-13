@@ -26,7 +26,7 @@ public class BookedRoom {
     @Column(name = "check_out")
     private LocalDate checkOutDate;
 
-    @Column(name = "guest_Name")
+    @Column(name = "guest_FullName")
     private String guestFullName;
 
     @Column(name = "guest_Email")
@@ -39,10 +39,10 @@ public class BookedRoom {
     private  int NumOfChildren;
 
     @Column(name = "total_guest")
-    private  int totalNumofGuest;
+    private  int totalNumOfGuest;
 
     @Column(name = "confirmation_Code")
-    private String BookingConfirmationCode;
+    private String bookingConfirmationCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     /* This annotation is used in Database to fetch many to one instances as there may be many bookings done on a single entity,
@@ -50,21 +50,21 @@ public class BookedRoom {
     @JoinColumn (name = "room_id")
     private Room room;
 
-    public void calculateTotalNumberofGuest(){
-        this.totalNumofGuest = this.NumOfAdults + this.NumOfChildren;
+    public void calculateTotalNumberOfGuest(){
+        this.totalNumOfGuest = this.NumOfAdults + this.NumOfChildren;
     }
 
     public void setNumOfAdults(int numOfAdults) {
         NumOfAdults = numOfAdults;
-        calculateTotalNumberofGuest(); //if anychanges done here will also changes the total num of guest i.e we called the function here
+        calculateTotalNumberOfGuest(); //if anychanges done here will also changes the total num of guest i.e we called the function here
     }
 
     public void setNumOfChildren(int numOfChildren) {
         NumOfChildren = numOfChildren;
-        calculateTotalNumberofGuest(); //if anychanges done here will also changes the total num of guest i.e we called the function here
+        calculateTotalNumberOfGuest(); //if anychanges done here will also changes the total num of guest i.e we called the function here
     }
 
     public void setBookingConfirmationCode(String bookingConfirmationCode) {
-        BookingConfirmationCode = bookingConfirmationCode;
+        this.bookingConfirmationCode = bookingConfirmationCode;
     }
 }

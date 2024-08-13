@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <nav className='navbar navbar-expand-lg bg-body-tertiary px-5 shadow mt-5 sticky-top'>
         <div className='container-fluid'>
-            <Link to={"/"}>
+            <Link to={"/"} className="navbar-brand">
             <span className='hotel-color'>
                 Lakeside Hotel
             </span>

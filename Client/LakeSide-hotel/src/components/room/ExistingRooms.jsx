@@ -130,7 +130,7 @@ useEffect(() => {
                                             </span>
                                         </Link>
                                         <button
-                                        className='btn btn-danger btn-sm'
+                                        className='btn btn-danger btn-sm ml-5'
                                         onClick = {() => handleDelete(room.id)}>
                                         <FaTrashAlt></FaTrashAlt>
                                         </button>
